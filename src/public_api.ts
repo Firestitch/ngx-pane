@@ -2,4 +2,6 @@
  * Public API Surface of fs-menu
  */
 
-export { FsComponentModule } from './app/fs-component.module';
+export { FsPaneModule } from './app/fs-pane.module';
+
+export { FsPane, PANE_DATA } from './app/services';

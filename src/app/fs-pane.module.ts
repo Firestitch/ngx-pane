@@ -1,30 +1,28 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FsComponentComponent } from './components/component';
-// import { FsComponentService } from './services';
+import { FsPaneComponent } from './components/pane';
+import { FsPane } from './services';
+
 
 @NgModule({
   imports: [
     CommonModule,
   ],
   exports: [
-    FsComponentComponent,
+    FsPaneComponent,
   ],
   entryComponents: [
   ],
   declarations: [
-    FsComponentComponent,
-  ],
-  providers: [
-    // FsComponentService,
+    FsPaneComponent,
   ],
 })
-export class FsComponentModule {
+export class FsPaneModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: FsComponentModule,
-      // providers: [FsComponentService]
+      ngModule: FsPaneModule,
+      providers: [ FsPane ]
     };
   }
 }

@@ -1,11 +1,11 @@
 {
-  "name": "@firestitch/package",
-  "title": "package.json -> Rename Title to Component Title",
-  "description": "@firestitch/package",
+  "name": "@firestitch/pane",
+  "title": "Pane Component",
+  "description": "@firestitch/pane",
   "version": "7.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/ngx-package"
+    "url": "https://github.com/Firestitch/ngx-pane"
   },
   "author": {
     "name": "Firestitch",

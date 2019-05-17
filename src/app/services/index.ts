@@ -1,1 +1,2 @@
-export * from './fs-component.service';
+export * from './pane.service';
+export * from './pane-data';

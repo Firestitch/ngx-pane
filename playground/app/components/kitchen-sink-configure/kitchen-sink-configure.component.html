@@ -3,20 +3,14 @@
   <h2>Configure</h2>
 
   <div class="configs">
-
-    <mat-form-field>
-      <input matInput placeholder="Image Width" type="number" [(ngModel)]="config.width">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Image Height" [(ngModel)]="config.height">
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="Text" type="text" [(ngModel)]="config.text">
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="reload()">Reload</button>
+    <button mat-raised-button color="primary" (click)="togglePane()">
+      <ng-container *ngIf="paneHidden; else hidePane">
+        Show Pane
+      </ng-container>
+      <ng-template #hidePane>
+        Hide Pane
+      </ng-template>
+    </button>
   </div>
 
 </div>
