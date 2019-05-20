@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Injector, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Injector,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -18,7 +27,10 @@ export class FsPaneComponent implements OnInit, OnDestroy {
   @Output()
   public visibilityChanged = new EventEmitter<boolean>();
 
-  public visibile = false;
+  @HostBinding('class.hidden')
+  public hidden = false;
+
+  public alive = false;
   public component: any;
   public componentInjector: any;
 
@@ -41,21 +53,30 @@ export class FsPaneComponent implements OnInit, OnDestroy {
         takeUntil(this._destroy$),
       )
       .subscribe((components) => {
-        const hasComponentData = components.has(this.name);
-
-        if (hasComponentData && !this.visibile) {
-          const config = components.get(this.name);
-
-          this._initInjector(config.data);
-          this.component = config.component;
-
-          this.visibile = true;
-          this.visibilityChanged.emit(this.visibile);
-        } else if (!hasComponentData && this.visibile) {
-          this.visibile = false;
-          this.visibilityChanged.emit(this.visibile);
-        }
+        this._componentsChanged(components);
       })
+  }
+
+  private _componentsChanged(components) {
+    const componentData = components.get(this.name);
+
+    if (componentData) {
+      // Create component
+      if (!this.alive) {
+        this._initInjector(componentData.data);
+        this.component = componentData.component;
+
+        this.alive = true;
+        this.hidden = componentData.hidden;
+      } else {
+        this.hidden = componentData.hidden;
+      }
+    } else {
+      // Destroy component by ngIf
+      if (this.alive) {
+        this.alive = false;
+      }
+    }
   }
 
   private _initInjector(data: any) {

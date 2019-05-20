@@ -3,7 +3,16 @@
   <h2>Configure</h2>
 
   <div class="configs">
-    <button mat-raised-button color="primary" (click)="togglePane()">
+    <button mat-raised-button color="primary" (click)="createOrDescroyPane()">
+      <ng-container *ngIf="!paneCreated; else destroyPane">
+        Create Pane
+      </ng-container>
+      <ng-template #destroyPane>
+        Destroy Pane
+      </ng-template>
+    </button>
+    <br>
+    <button mat-raised-button color="primary" (click)="togglePaneVisibility()" *ngIf="paneCreated">
       <ng-container *ngIf="paneHidden; else hidePane">
         Show Pane
       </ng-container>

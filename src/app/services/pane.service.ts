@@ -15,22 +15,40 @@ export class FsPane {
     return this._components$.asObservable();
   }
 
-  public show(name: string, component: ComponentType<any>, data: any) {
+  public create(name: string, component: ComponentType<any>, data: any) {
     if (this._componentsStore.has(name)) {
       this._componentsStore.delete(name);
     }
 
+    debugger;
     this._componentsStore.set(name, {
       component: component,
       data: data,
+      hidden: false,
     });
+
+    this._updateComponents();
+  }
+
+  public destroy(name: string) {
+    if (this._componentsStore.has(name)) {
+      this._componentsStore.delete(name);
+    }
+
+    this._updateComponents();
+  }
+
+  public show(name: string) {
+    if (this._componentsStore.has(name)) {
+      this._componentsStore.get(name).hidden = false;
+    }
 
     this._updateComponents();
   }
 
   public hide(name: string) {
     if (this._componentsStore.has(name)) {
-      this._componentsStore.delete(name);
+      this._componentsStore.get(name).hidden = true;
     }
 
     this._updateComponents();

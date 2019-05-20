@@ -13,7 +13,8 @@ export class KitchenSinkConfigureComponent {
 
   public config;
   public example: ExampleService;
-  public paneHidden = true;
+  public paneHidden = false;
+  public paneCreated = false;
 
   constructor(
     public drawer: DrawerRef<KitchenSinkConfigureComponent>,
@@ -28,13 +29,24 @@ export class KitchenSinkConfigureComponent {
     this.data.example.reload();
   }
 
-  public togglePane() {
+  public togglePaneVisibility() {
     if (this.paneHidden) {
-      this.pane.show('test', CustomPaneComponent, { super: 'test' })
+      this.pane.show('test');
       this.paneHidden = false;
     } else {
       this.pane.hide('test');
       this.paneHidden = true;
+    }
+  }
+
+  public createOrDescroyPane() {
+    if (!this.paneCreated) {
+      this.pane.create('test', CustomPaneComponent, { super: 'test' });
+      this.paneCreated = true;
+    } else {
+      this.pane.destroy('test');
+      this.paneCreated = false;
+      this.paneHidden = false;
     }
   }
 }
