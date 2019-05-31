@@ -1,8 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FsPaneComponent } from './components/pane';
-import { FsPane } from './services';
+import { FsPaneComponent } from './components/pane/pane.component';
+import { FsPane } from './services/pane.service';
 
 
 @NgModule({

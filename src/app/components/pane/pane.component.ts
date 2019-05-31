@@ -11,7 +11,8 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { FsPane, PANE_DATA } from '../../services';
+import { FsPane } from '../../services/pane.service';
+import { PANE_DATA } from '../../services/pane-data'
 
 
 @Component({
