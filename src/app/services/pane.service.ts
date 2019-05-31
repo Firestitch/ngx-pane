@@ -74,9 +74,9 @@ export class FsPane {
     });
 
     if (hasOpenedPanes) {
-      this._renderer.addClass(document.body, 'fs-pane-opened');
+      this._renderer.addClass(document.body, 'fs-pane-open');
     } else {
-      this._renderer.removeClass(document.body, 'fs-pane-opened');
+      this._renderer.removeClass(document.body, 'fs-pane-open');
     }
   }
 
