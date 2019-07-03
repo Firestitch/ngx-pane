@@ -2,7 +2,7 @@
   "name": "@firestitch/pane",
   "title": "Pane Component",
   "description": "@firestitch/pane",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-pane"

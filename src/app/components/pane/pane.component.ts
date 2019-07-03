@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, ElementRef,
   EventEmitter,
   HostBinding,
   Injector,
@@ -8,8 +8,11 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+
+import { ContentObserver } from '@angular/cdk/observers';
+
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { FsPane } from '../../services/pane.service';
 import { PANE_DATA } from '../../services/pane-data'
@@ -37,13 +40,36 @@ export class FsPaneComponent implements OnInit, OnDestroy {
 
   private _destroy$ = new Subject<void>();
 
-  constructor(private _injector: Injector, private _pane: FsPane) {}
+  constructor(
+    public el: ElementRef,
+    private _injector: Injector,
+    private _pane: FsPane,
+    private _contentObserver: ContentObserver,
+  ) {
+  }
 
   public ngOnInit() {
     this._subscribeToUpdates();
+
+    this._pane.registerPaneComponent(this.name, this);
+
+    this._contentObserver.observe(this.el.nativeElement)
+      .pipe(
+        takeUntil(this._destroy$),
+        debounceTime(300),
+      )
+      .subscribe(() => {
+        const paneRef = this._pane.getPaneRef(this.name);
+
+        if (paneRef) {
+          paneRef.contentChanged();
+        }
+      })
   }
 
   public ngOnDestroy() {
+    this._pane.removePaneComponent(this.name);
+
     this._destroy$.next();
     this._destroy$.complete();
   }
