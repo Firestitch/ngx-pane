@@ -23,7 +23,7 @@ import { FsPane } from './services/pane.service';
   ],
 })
 export class FsPaneModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<FsPaneModule> {
     return {
       ngModule: FsPaneModule,
       providers: [ FsPane ]

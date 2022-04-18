@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FsExampleComponent } from '@firestitch/example';
 
+import { FsPane } from '@firestitch/pane';
+
 import { KitchenSinkConfigureComponent } from '../kitchen-sink-configure';
 
 @Component({
@@ -10,7 +12,7 @@ import { KitchenSinkConfigureComponent } from '../kitchen-sink-configure';
 })
 export class KitchenSinkComponent {
 
-  constructor(private exampleComponent: FsExampleComponent) {
+  constructor(private exampleComponent: FsExampleComponent, private _pane: FsPane) {
     exampleComponent.setConfigureComponent(KitchenSinkConfigureComponent, {});
   }
 }
